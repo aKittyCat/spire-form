@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D&D Character – Discord Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="dark" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              fantasy: {
+                bg: "#0B1220",
+                panel: "#111827",
+                border: "#283447",
+                gold: "#D4AF37",
+                accent: "#8B5CF6",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      input[type="text"], input[type="number"], textarea { font-size: 16px; }
+    </style>
+  </head>
+  <body class="bg-fantasy-bg text-gray-100 min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+      <header class="mb-6">
+        <h1 class="text-2xl md:text-3xl font-bold tracking-tight">
+          🧙‍♂️ แบบฟอร์มสร้างตัวละคร D&D 5e 2014
+        </h1>
+        <p class="text-gray-300 mt-2">
+          กรอกข้อมูลแล้วกด <span class="font-semibold text-fantasy-gold">Generate</span> เพื่อสร้างข้อความตาม Template
+        </p>
+      </header>
+
+      <!-- Info Card (แสดงบนหน้า แต่จะไม่ถูกรวมในข้อความ Generate) -->
+      <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg mb-6">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="h-2 w-2 rounded-full bg-fantasy-gold"></div>
+          <h2 class="text-lg font-semibold">📌 ข้อมูล / วิธีสร้างตัวละคร (เพื่ออ้างอิง)</h2>
+        </div>
+        <ol class="list-decimal list-inside space-y-2 text-gray-200">
+          <li>ทำสำเนา <a href="https://docs.google.com/spreadsheets/d/1dvQ9WB0muYBLnrZqVhT9YRBcgpCXGQlBwR1rMwuqg6s/" target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">Character Tracking Sheet</a> ไว้บันทึก session/เลเวล</li>
+          <li>เลเวลเริ่มต้น 3, ใช้ <b>35 point buy</b> และ <b>Fixed HP</b> <a href="https://chicken-dinner.com/5e/5e-point-buy.html" target="_blank" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">ในเว็บนี้</a> <span class="ml-1 inline-block rounded-md bg-red-600/20 px-2 py-0.5 text-red-300 text-sm font-semibold">ห้ามกดเลือกเผ่าในเว็บที่ใช้เลือก stat</span></li>
+          <li>เว็บสร้างตัวละคร: <b>DnD Beyond</b> / <b>Dicecloud</b> / <b>G-sheet</b> (ถ้าเผ่ามีหลายเวอร์ชั่นจากต่างเล่ม ให้ระบุชื่อหนังสือ)</li>
+          <li>ลงตัวละครในห้องส่งตัวละคร ตามรูปแบบปักหมุด</li>
+          <li>ตรวจผ่านแล้วได้ ✅ ไปที่ <b>roles</b> เลือก <b>@Tier 1 (lvl 3-4)</b></li>
+          <li><span class="ml-1 inline-block rounded-md bg-red-600/20 px-2 py-0.5 text-red-300 text-sm font-semibold">ผู้เล่นไม่สามารถสร้างตัวละคร Alignment Evil ได้</span></li>
+          <li><span class="ml-1 inline-block rounded-md bg-red-600/20 px-2 py-0.5 text-red-300 text-sm font-semibold">คำเตือน: หนังสือทุกอย่างจากปี 2024 เป็นต้นไปไม่สามารถนำมาใช้ได้</span></li>
+        </ol>
+      </section>
+
+      <form id="charForm" class="space-y-6">
+        <!-- Basics -->
+        <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
+          <h3 class="text-lg font-semibold mb-4">🧾 ข้อมูลตัวละคร</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-sm text-gray-300">ชื่อ</span>
+              <input type="text" id="name" required class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Arannis, Lyra" />
+            </label>
+            <label class="block">
+              <span class="text-sm text-gray-300">คลาสหลัก (เริ่มที่เลเวล 3)</span>
+              <input type="text" id="primaryClass" required class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Fighter (Champion)" />
+            </label>
+            <label class="block md:col-span-2">
+              <span class="text-sm text-gray-300">คลาสรอง (ถ้ามี)</span>
+              <input type="text" id="multiclass" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Rogue 1 / Fighter 2 (ถ้าไม่มีเว้นว่าง)" />
+            </label>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <label class="block">
+              <span class="text-sm text-gray-300">เผ่า & ASI Bonus จากเผ่า</span>
+              <textarea id="raceAsi" rows="3" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="ระบุเผ่าย่อย, spellcasting trait และถ้าเผ่ามีหลายเวอร์ชั่นให้บอกว่ามาจากเล่มไหน ตัวอย่าง: Variant Human (STR +1) (WIS +1)"></textarea>
+            </label>
+            <label class="block">
+              <span class="text-sm text-gray-300">Custom Lineage Trait (ถ้ามี)</span>
+              <textarea id="customLineage" rows="3" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Size Medium / Darkvision 60 ft."></textarea>
+            </label>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-4 mt-4">
+            <label class="block md:col-span-3">
+              <span class="text-sm text-gray-300">Background</span>
+              <input type="text" id="background" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Soldier, Sage" />
+            </label>
+          </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">📊 ค่าสถานะ (ไม่รวม Bonus) — 35 Point Buy, Fixed HP</h3>
+            <span class="text-xs text-gray-400">*ใส่เฉพาะค่า Base (ก่อนเผ่า/Feat)*</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4">
+            <div><label class="text-sm text-gray-300">STR</label><input id="str" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
+            <div><label class="text-sm text-gray-300">DEX</label><input id="dex" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
+            <div><label class="text-sm text-gray-300">CON</label><input id="con" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
+            <div><label class="text-sm text-gray-300">INT</label><input id="int" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
+            <div><label class="text-sm text-gray-300">WIS</label><input id="wis" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
+            <div><label class="text-sm text-gray-300">CHA</label><input id="cha" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
+          </div>
+        </section>
+
+        <!-- Proficiencies -->
+        <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
+          <h3 class="text-lg font-semibold mb-4">🎒 ความถนัด & ตัวเลือกอื่นๆ</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-sm text-gray-300">ภาษา (ระบุที่มา R/C/B)</span>
+              <textarea id="languages" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Common (R), Elvish (R), Draconic (B)"></textarea>
+            </label>
+            <label class="block">
+              <span class="text-sm text-gray-300">Proficient Skills (ระบุที่มา R/C/B)</span>
+              <textarea id="skills" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Perception (C), Athletics (B)"></textarea>
+            </label>
+            <label class="block">
+              <span class="text-sm text-gray-300">Proficient Tools (ระบุที่มา R/C/B)</span>
+              <textarea id="tools" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Thieves' Tools (C)"></textarea>
+            </label>
+            <label class="block">
+              <span class="text-sm text-gray-300">Expertise (ถ้ามี)</span>
+              <textarea id="expertise" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Stealth, Perception"></textarea>
+            </label>
+            <label class="block md:col-span-2">
+              <span class="text-sm text-gray-300">Feat (ถ้ามี)</span>
+              <input type="text" id="feat" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น War Caster" />
+            </label>
+            <label class="block md:col-span-2">
+              <span class="text-sm text-gray-300">ตัวเลือกอื่นๆจากคลาส (ถ้ามี)</span>
+              <textarea id="classOptions" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Fighting Style: Defense"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <!-- Cantrips & Spells -->
+        <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
+          <h3 class="text-lg font-semibold mb-4">🪄 Cantrips & Spells (ถ้ามี)</h3>
+          <div class="grid md:grid-cols-3 gap-4">
+            <label class="block">
+              <span class="text-sm text-gray-300">Cantrips</span>
+              <textarea id="cantrips" rows="3" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Fire Bolt, Guidance, Minor Illusion"></textarea>
+            </label>
+            <label class="block">
+              <span class="text-sm text-gray-300">Spells ระดับ 1</span>
+              <textarea id="spells1" rows="3" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Shield, Healing Word, Magic Missile"></textarea>
+            </label>
+            <label class="block">
+              <span class="text-sm text-gray-300">Spells ระดับ 2</span>
+              <textarea id="spells2" rows="3" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Misty Step, Aid, Scorching Ray"></textarea>
+            </label>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">แนะนำให้พิมพ์ชื่อคาถาเป็นภาษาอังกฤษและคั่นด้วยจุลภาค (,)</p>
+        </section>
+
+        <!-- Platforms & Links (ลบตัวเลือกเริ่มต้นของคลาสออกแล้ว) -->
+        <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
+          <h3 class="text-lg font-semibold mb-4">🌐 แพลตฟอร์ม & ลิงก์</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <fieldset class="border border-fantasy-border rounded-xl p-3">
+              <legend class="px-2 text-sm text-gray-300">แพลตฟอร์มที่ใช้สร้างตัวละคร</legend>
+              <div class="flex flex-col gap-2 mt-2">
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="platform" value="DnD Beyond" class="accent-fantasy-accent" checked />
+                  <span>DnD Beyond (ใช้งานง่ายที่สุด)</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="platform" value="Dicecloud" class="accent-fantasy-accent" />
+                  <span>Dicecloud</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="platform" value="G-sheet" class="accent-fantasy-accent" />
+                  <span>G-sheet</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="block md:col-span-2">
+              <span class="text-sm text-gray-300">Tracking Sheet Link</span>
+              <input type="url" id="trackLink" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="วางลิงก์ไฟล์สำเนา Character Tracking Sheet" />
+            </label>
+
+            <label class="block md:col-span-2">
+              <span class="text-sm text-gray-300">Character Sheet Link</span>
+              <input type="url" id="sheetLink" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="วางลิงก์ชีทของตัวละคร (DnD Beyond / Dicecloud / G-sheet)" />
+            </label>
+          </div>
+        </section>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+          <button type="button" id="btnGenerate" class="inline-flex items-center justify-center rounded-xl bg-fantasy-accent px-4 py-2 font-semibold shadow hover:opacity-90 active:scale-[.99] transition">
+            Generate ข้อความสำหรับ Discord
+          </button>
+          <button type="button" id="btnCopy" class="inline-flex items-center justify-center rounded-xl border border-fantasy-border px-4 py-2 font-medium hover:bg-white/5 transition">
+            คัดลอกข้อความ
+          </button>
+          <button type="reset" class="inline-flex items-center justify-center rounded-xl border border-fantasy-border px-4 py-2 font-medium hover:bg-white/5 transition">
+            ล้างฟอร์ม
+          </button>
+          <span id="toast" class="hidden text-sm text-emerald-300">คัดลอกแล้ว ✅</span>
+        </div>
+      </form>
+
+      <!-- Output -->
+      <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg mt-6">
+        <h3 class="text-lg font-semibold mb-3">🧾 ข้อความตัวอย่างสำหรับวางใน Discord</h3>
+        <textarea id="output" rows="16" class="w-full rounded-xl border border-fantasy-border bg-[#0b1325] px-3 py-3 font-mono text-sm"></textarea>
+        <p class="text-xs text-gray-400 mt-2">หมายเหตุ: ใช้ตัวหนา/บูลเล็ทให้พอดีเพื่อความอ่านง่ายใน Discord</p>
+      </section>
+
+      <footer class="text-center text-gray-500 text-xs mt-8">The Spire Tower | aKittyCat🐈</footer>
+    </div>
+
+    
+    <!-- แบบเก่า: lines.push(`คลาสหลัก: ${primaryClass || '-'} (เริ่มต้นที่เลเวล 3)`); -->
+    <script>
+      function val(id) { return (document.getElementById(id)?.value || '').trim(); }
+      function num(id) { const v = document.getElementById(id)?.value; return (v === '' || isNaN(Number(v))) ? '0' : String(Number(v)); }
+      function radio(name) { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; }
+
+      function composeDiscordText() {
+        const name = val('name');
+        const primaryClass = val('primaryClass');
+        const multiclass = val('multiclass');
+        const raceAsi = val('raceAsi');
+        const customLineage = val('customLineage');
+        const background = val('background');
+
+        const STR = num('str'), DEX = num('dex'), CON = num('con'), INT = num('int'), WIS = num('wis'), CHA = num('cha');
+
+        const languages = val('languages');
+        const skills = val('skills');
+        const tools = val('tools');
+        const expertise = val('expertise');
+        const feat = val('feat');
+        const classOptions = val('classOptions');
+
+        const cantrips = val('cantrips');
+        const spells1 = val('spells1');
+        const spells2 = val('spells2');
+
+        const platform = radio('platform');
+        const trackLink = val('trackLink');
+        const sheetLink = val('sheetLink');
+
+        const lines = [];
+        lines.push(`**Character Creation Template**`);
+        lines.push(`ชื่อ: ${name || '-'}`);
+        lines.push('');
+        lines.push(`คลาสหลัก: ${primaryClass || '-'}`);
+        lines.push('');
+        lines.push(`คลาสรอง: ${multiclass || '-'}`);
+        lines.push('');
+        lines.push(`เผ่าและ ASI Bonus จากเผ่า: ${raceAsi || '-'}`);
+        lines.push('');
+        lines.push(`Custom Lineage Trait: ${customLineage || '-'}`);
+        lines.push('');
+        lines.push(`Background: ${background || '-'}`);
+        lines.push('');
+        lines.push(`Stat หลัก: (ไม่รวม Bonus) ${STR} Str / ${DEX} Dex / ${CON} Con / ${INT} Int / ${WIS} Wis / ${CHA} Cha`);
+        lines.push('');
+        lines.push(`ภาษา: ${languages || '-'}`);
+        lines.push('');
+        lines.push(`Proficient Skills: ${skills || '-'}`);
+        lines.push('');
+        lines.push(`Proficient Tools: ${tools || '-'}`);
+        lines.push('');
+        lines.push(`Expertise: ${expertise || '-'}`);
+        lines.push('');
+        lines.push(`Feat: ${feat || '-'}`);
+        lines.push('');
+        lines.push(`ตัวเลือกอื่นๆจากคลาส: ${classOptions || '-'}`);
+        lines.push('');
+        lines.push(`Cantrips: ${cantrips || '-'}`);
+        lines.push('');
+        lines.push(`Spells ระดับ 1: ${spells1 || '-'}`);
+        lines.push('');
+        lines.push(`Spells ระดับ 2: ${spells2 || '-'}`);
+        lines.push('');
+        lines.push(`Tracking Sheet Link: ${trackLink || '-'}`);
+        lines.push(`Character Sheet Link (${platform || 'แพลตฟอร์ม'}): ${sheetLink || '-'}`);
+
+        return lines.join('\n');
+      }
+
+      // Wire up buttons
+      document.getElementById('btnGenerate').addEventListener('click', () => {
+        try {
+          const out = document.getElementById('output');
+          out.value = composeDiscordText();
+          out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (err) {
+          console.error('[Generate Error]', err);
+          alert('เกิดปัญหาในการสร้างข้อความ กรุณารีเฟรชหน้าแล้วลองอีกครั้ง');
+        }
+      });
+
+      document.getElementById('btnCopy').addEventListener('click', async () => {
+        const out = document.getElementById('output');
+        if (!out.value.trim()) out.value = composeDiscordText();
+        try {
+          await navigator.clipboard.writeText(out.value);
+          const t = document.getElementById('toast');
+          t.classList.remove('hidden');
+          setTimeout(() => t.classList.add('hidden'), 1600);
+        } catch (e) {
+          alert('คัดลอกไม่สำเร็จ กรุณาคัดลอกด้วยตนเอง');
+        }
+      });
+
+      // Persist to localStorage
+      const persistIds = ['name','primaryClass','multiclass','raceAsi','customLineage','background','str','dex','con','int','wis','cha','languages','skills','tools','expertise','feat','classOptions','cantrips','spells1','spells2','trackLink','sheetLink'];
+      window.addEventListener('DOMContentLoaded', () => {
+        persistIds.forEach(id => {
+          const saved = localStorage.getItem('dcc_'+id);
+          if (saved !== null) {
+            const el = document.getElementById(id);
+            if (el) el.value = saved;
+          }
+        });
+        const p = localStorage.getItem('dcc_platform');
+        if (p) {
+          const el = document.querySelector(`input[name="platform"][value="${p}"]`);
+          if (el) el.checked = true;
+        }
+      });
+      document.addEventListener('input', (e) => {
+        const id = e.target.id;
+        if (persistIds.includes(id)) {
+          localStorage.setItem('dcc_'+id, e.target.value);
+        }
+        if (e.target.name === 'platform') {
+          localStorage.setItem('dcc_platform', e.target.value);
+        }
+      });
+    </script>
+  </body>
+</html>
