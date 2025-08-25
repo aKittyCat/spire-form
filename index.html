@@ -70,7 +70,7 @@
             </label>
             <label class="block md:col-span-2">
               <span class="text-sm text-gray-300">คลาสรอง (ถ้ามี)</span>
-              <input type="text" id="multiclass" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Rogue 1 / Fighter 2 (ถ้าไม่มีเว้นว่าง)" />
+              <input type="text" id="multiclass" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="sub-class ต่างของสายนั้ันๆ (ถ้าไม่มีเว้นว่าง)" />
             </label>
           </div>
 
@@ -97,7 +97,7 @@
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
           <div class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">📊 ค่าสถานะ (ไม่รวม Bonus) — 35 Point Buy, Fixed HP</h3>
-            <span class="text-xs text-gray-400">*ใส่เฉพาะค่า Base (ก่อนเผ่า/Feat)*</span>
+            <span class="text-xs text-gray-400">*ใส่เฉพาะค่า Base (ก่อนเผ่า/Feat)</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4">
             <div><label class="text-sm text-gray-300">STR</label><input id="str" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
@@ -131,15 +131,15 @@
             </label>
             <label class="block">
               <span class="text-sm text-gray-300">Expertise (ถ้ามี)</span>
-              <textarea id="expertise" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Stealth, Perception"></textarea>
+              <textarea id="expertise" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Stealth (C), Perception (B)"></textarea>
             </label>
             <label class="block md:col-span-2">
               <span class="text-sm text-gray-300">Feat (ถ้ามี)</span>
-              <input type="text" id="feat" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น War Caster" />
+              <input type="text" id="feat" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น War Caster (R)" />
             </label>
             <label class="block md:col-span-2">
               <span class="text-sm text-gray-300">ตัวเลือกอื่นๆจากคลาส (ถ้ามี)</span>
-              <textarea id="classOptions" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Fighting Style: Defense"></textarea>
+              <textarea id="classOptions" rows="2" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="เช่น Fighting Style: Defense (C)"></textarea>
             </label>
           </div>
         </section>
@@ -216,6 +216,7 @@
       <!-- Output -->
       <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg mt-6">
         <h3 class="text-lg font-semibold mb-3">🧾 ข้อความตัวอย่างสำหรับวางใน Discord</h3>
+        <span class="text-xs text-gray-400">*สามารถแก้ไขในหน้าตัวอย่างนี้ได้</span>
         <textarea id="output" rows="16" class="w-full rounded-xl border border-fantasy-border bg-[#0b1325] px-3 py-3 font-mono text-sm"></textarea>
         <p class="text-xs text-gray-400 mt-2">หมายเหตุ: ใช้ตัวหนา/บูลเล็ทให้พอดีเพื่อความอ่านง่ายใน Discord</p>
       </section>
