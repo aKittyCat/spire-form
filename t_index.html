@@ -336,7 +336,10 @@
             .join(", ");
 
           // === คลาสรอง ===
-          const multiclass = safeValue(c.classes[0]?.subclassDefinition?.name, "");
+          const multiclass = c.classes
+            .map(cls => safeValue(cls?.subclassDefinition?.name, ""))
+            .filter(name => name !== "")
+            .join(", ");
 
           // === เผ่า + ASI ===
           let asiText = "";
