@@ -110,7 +110,7 @@
             <b>G-sheet</b> (ถ้าเผ่ามีหลายเวอร์ชั่นจากต่างเล่ม
             ให้ระบุชื่อหนังสือ)
           </li>
-          <li>ลงตัวละครในห้องส่งตัวละคร ตามรูปแบบปักหมุด</li>
+          <li>ลงตัวละครในช่องส่งตัวละคร ตามรูปแบบปักหมุด</li>
           <li>
             ตรวจผ่านแล้วได้ ✅ ไปที่ช่อง <b>roles</b> เลือก <b>@Tier 1 (lvl 3-4)</b>
           </li>
@@ -170,17 +170,46 @@
 
         <!-- Stats -->
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
-          <div class="flex items-center justify-between">
+          <div class="flex flex-wrap items-center justify-between gap-2">
             <h3 class="text-lg font-semibold">📊 ค่าสถานะ (ไม่รวม Bonus) — 35 Point Buy, Fixed HP</h3>
+            <div class="flex items-center gap-2">
+              <span id="totalPoints" class="text-sm font-mono px-2 py-1 rounded">Total Points: 0/35</span>
+              <button
+                type="button"
+                id="resetStats"
+                class="text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded border border-gray-600"
+                title="รีเซ็ตค่าสถานะเป็น 8 ทั้งหมด"
+              >
+                Reset
+              </button>
+            </div>
             <span class="text-xs text-red-400">*ใส่เฉพาะค่า Base</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4">
-            <div><label class="text-sm text-gray-300">STR</label><input id="str" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
-            <div><label class="text-sm text-gray-300">DEX</label><input id="dex" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
-            <div><label class="text-sm text-gray-300">CON</label><input id="con" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
-            <div><label class="text-sm text-gray-300">INT</label><input id="int" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
-            <div><label class="text-sm text-gray-300">WIS</label><input id="wis" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
-            <div><label class="text-sm text-gray-300">CHA</label><input id="cha" type="number" min="3" max="18" placeholder="0" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" /></div>
+            <div>
+              <label class="text-sm text-gray-300">STR</label>
+              <input id="str" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">DEX</label>
+              <input id="dex" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">CON</label>
+              <input id="con" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">INT</label>
+              <input id="int" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">WIS</label>
+              <input id="wis" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">CHA</label>
+              <input id="cha" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+            </div>
           </div>
         </section>
 
@@ -189,7 +218,7 @@
           <div class="flex items-center justify-between">
             <h3 class="text-lg font-semibold mb-4">🎒 ความถนัด & ตัวเลือกอื่นๆ</h3>
             <span class="text-xs text-green-400"
-              >*R ย่อมาจาก Race, C ย่อมาจาก Class และ B ย่อมาจาก Background
+              >*ระบุที่มา:R ย่อมาจาก Race, C ย่อมาจาก Class และ B ย่อมาจาก Background
             </span>
           </div>
           <div class="grid md:grid-cols-2 gap-4">
@@ -291,6 +320,45 @@
     <script>
       // ใช้ corsproxy.io
       const PROXY_URL = 'https://corsproxy.io/?';
+
+      // ตารางแต้ม 35 Point Buy
+      const pointCosts = {
+        8: 0, 9: 1, 10: 2, 11: 3,
+        12: 4, 13: 5, 14: 7, 15: 9,
+        16: 12, 17: 15, 18: 19
+      };
+
+      // อัปเดต Total Points
+      function updateTotalPoints() {
+        const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+        let total = 0;
+        stats.forEach(id => {
+          const val = parseInt(document.getElementById(id).value) || 8;
+          total += pointCosts[val] || 0;
+        });
+        document.getElementById('totalPoints').textContent = `Total Points: ${total}/35`;
+      }
+
+      // Reset ค่า Stat ทั้งหมดเป็น 8
+      function resetStats() {
+        const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+        stats.forEach(id => {
+          document.getElementById(id).value = 8;
+        });
+        updateTotalPoints();
+      }
+
+      // ฟังก์ชันเมื่อโหลดหน้าหรือเปลี่ยนค่า
+      window.addEventListener('DOMContentLoaded', () => {
+        updateTotalPoints();
+
+        const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+        stats.forEach(id => {
+          document.getElementById(id).addEventListener('input', updateTotalPoints);
+        });
+
+        document.getElementById('resetStats').addEventListener('click', resetStats);
+      });
 
       async function fetchCharacter() {
         const urlInput = document.getElementById("characterUrl").value.trim();
@@ -404,6 +472,9 @@
 
           // อัปเดตลิงก์อัตโนมัติ
           document.getElementById("sheetLink").value = c.readonlyUrl;
+
+          // อัปเดต Total Points หลังดึงข้อมูล
+          updateTotalPoints();
 
         } catch (err) {
           console.error("Fetch Error:", err);
