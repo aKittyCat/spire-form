@@ -27,6 +27,54 @@
       input[type="text"], input[type="number"], textarea {
         font-size: 16px;
       }
+      /* ซ่อนลูกศรบน Chrome, Edge, Safari */
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      /* ซ่อนลูกศรบน Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+      .stat-input-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+      }
+      .stat-btn {
+        background-color: #1e293b;
+        color: #e2e8f0;
+        border: 1px solid #334155;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 6px;
+        user-select: none;
+        transition: all 0.2s;
+      }
+      .stat-btn:hover {
+        background-color: #334155;
+        border-color: #475569;
+      }
+      .stat-btn:active {
+        transform: scale(0.95);
+      }
+      .stat-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .stat-value {
+        width: 40px;
+        text-align: center;
+        margin: 0;
+      }
     </style>
   </head>
   <body class="bg-fantasy-bg text-gray-100 min-h-screen">
@@ -95,7 +143,7 @@
           <li>
             เลเวลเริ่มต้น 3, ใช้ <b>35 point buy</b> และ <b>Fixed HP</b>
             <a
-              href="https://chicken-dinner.com/5e/5e-point-buy.html"
+              href="https://chicken-dinner.com/5e/5e-point-buy.html#select&NA&8&8&8&8&8&8&0&0&35&18&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4"
               target="_blank"
               class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline"
               >ในเว็บนี้</a
@@ -170,46 +218,72 @@
 
         <!-- Stats -->
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
-          <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-4">
             <h3 class="text-lg font-semibold">📊 ค่าสถานะ (ไม่รวม Bonus) — 35 Point Buy, Fixed HP</h3>
-            <div class="flex items-center gap-2">
-              <span id="totalPoints" class="text-sm font-mono px-2 py-1 rounded">Total Points: 0/35</span>
-              <button
-                type="button"
-                id="resetStats"
-                class="text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded border border-gray-600"
-                title="รีเซ็ตค่าสถานะเป็น 8 ทั้งหมด"
-              >
-                Reset
-              </button>
+            <div class="flex items-center justify-end gap-2">
+              <span class="text-xs text-red-400">*ใส่เฉพาะค่า Base</span>
             </div>
-            <span class="text-xs text-red-400">*ใส่เฉพาะค่า Base</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4">
-            <div>
+            <div class="flex flex-col items-center">
               <label class="text-sm text-gray-300">STR</label>
-              <input id="str" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+              <div class="stat-input-container">
+                <button type="button" class="stat-btn" onclick="decreaseStat('str')">−</button>
+                <input id="str" type="text" readonly value="8" class="mt-1 stat-value bg-[#0f172a] border border-fantasy-border text-center" />
+                <button type="button" class="stat-btn" onclick="increaseStat('str')">+</button>
+              </div>
             </div>
-            <div>
+            <div class="flex flex-col items-center">
               <label class="text-sm text-gray-300">DEX</label>
-              <input id="dex" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+              <div class="stat-input-container">
+                <button type="button" class="stat-btn" onclick="decreaseStat('dex')">−</button>
+                <input id="dex" type="text" readonly value="8" class="mt-1 stat-value bg-[#0f172a] border border-fantasy-border text-center" />
+                <button type="button" class="stat-btn" onclick="increaseStat('dex')">+</button>
+              </div>
             </div>
-            <div>
+            <div class="flex flex-col items-center">
               <label class="text-sm text-gray-300">CON</label>
-              <input id="con" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+              <div class="stat-input-container">
+                <button type="button" class="stat-btn" onclick="decreaseStat('con')">−</button>
+                <input id="con" type="text" readonly value="8" class="mt-1 stat-value bg-[#0f172a] border border-fantasy-border text-center" />
+                <button type="button" class="stat-btn" onclick="increaseStat('con')">+</button>
+              </div>
             </div>
-            <div>
+            <div class="flex flex-col items-center">
               <label class="text-sm text-gray-300">INT</label>
-              <input id="int" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+              <div class="stat-input-container">
+                <button type="button" class="stat-btn" onclick="decreaseStat('int')">−</button>
+                <input id="int" type="text" readonly value="8" class="mt-1 stat-value bg-[#0f172a] border border-fantasy-border text-center" />
+                <button type="button" class="stat-btn" onclick="increaseStat('int')">+</button>
+              </div>
             </div>
-            <div>
+            <div class="flex flex-col items-center">
               <label class="text-sm text-gray-300">WIS</label>
-              <input id="wis" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+              <div class="stat-input-container">
+                <button type="button" class="stat-btn" onclick="decreaseStat('wis')">−</button>
+                <input id="wis" type="text" readonly value="8" class="mt-1 stat-value bg-[#0f172a] border border-fantasy-border text-center" />
+                <button type="button" class="stat-btn" onclick="increaseStat('wis')">+</button>
+              </div>
             </div>
-            <div>
+            <div class="flex flex-col items-center">
               <label class="text-sm text-gray-300">CHA</label>
-              <input id="cha" type="number" min="8" max="18" value="8" class="mt-1 w-full rounded-lg border border-fantasy-border bg-[#0f172a] px-2 py-2 text-center" />
+              <div class="stat-input-container">
+                <button type="button" class="stat-btn" onclick="decreaseStat('cha')">−</button>
+                <input id="cha" type="text" readonly value="8" class="mt-1 stat-value bg-[#0f172a] border border-fantasy-border text-center" />
+                <button type="button" class="stat-btn" onclick="increaseStat('cha')">+</button>
+              </div>
             </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-end gap-2 mt-4">
+            <span id="totalPoints" class="text-sm font-mono px-2 py-1 rounded">Total Points: 0/35</span>
+            <button
+              type="button"
+              id="resetStats"
+              class="text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded border border-gray-600"
+              title="รีเซ็ตค่าสถานะเป็น 8 ทั้งหมด"
+            >
+              Reset
+            </button>
           </div>
         </section>
 
@@ -339,6 +413,24 @@
         document.getElementById('totalPoints').textContent = `Total Points: ${total}/35`;
       }
 
+      // เพิ่มค่า Stat
+      function increaseStat(id) {
+        const input = document.getElementById(id);
+        let value = parseInt(input.value);
+        if (value >= 18) return;
+        input.value = value + 1;
+        updateTotalPoints();
+      }
+
+      // ลดค่า Stat
+      function decreaseStat(id) {
+        const input = document.getElementById(id);
+        let value = parseInt(input.value);
+        if (value <= 8) return;
+        input.value = value - 1;
+        updateTotalPoints();
+      }
+
       // Reset ค่า Stat ทั้งหมดเป็น 8
       function resetStats() {
         const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
@@ -351,11 +443,6 @@
       // ฟังก์ชันเมื่อโหลดหน้าหรือเปลี่ยนค่า
       window.addEventListener('DOMContentLoaded', () => {
         updateTotalPoints();
-
-        const stats = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
-        stats.forEach(id => {
-          document.getElementById(id).addEventListener('input', updateTotalPoints);
-        });
 
         document.getElementById('resetStats').addEventListener('click', resetStats);
       });
