@@ -635,7 +635,8 @@
       });
 
       // Persist
-      const persistIds = ["name", "primaryClass", "multiclass", "raceAsi", "customLineage", "background", "str", "dex", "con", "int", "wis", "cha", "languages", "skills", "tools", "expertise", "feat", "classOptions", "cantrips", "spells1", "spells2", "trackLink", "sheetLink"];
+      // const persistIds = ["name", "primaryClass", "multiclass", "raceAsi", "customLineage", "background", "str", "dex", "con", "int", "wis", "cha", "languages", "skills", "tools", "expertise", "feat", "classOptions", "cantrips", "spells1", "spells2", "trackLink", "sheetLink"];
+      const persistIds = ["name", "primaryClass", "multiclass", "raceAsi", "customLineage", "background", "languages", "skills", "tools", "expertise", "feat", "classOptions", "cantrips", "spells1", "spells2", "trackLink", "sheetLink"];
       window.addEventListener("DOMContentLoaded", () => {
         persistIds.forEach(id => {
           const saved = localStorage.getItem("dcc_" + id);
