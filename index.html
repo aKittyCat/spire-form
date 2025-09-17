@@ -511,6 +511,100 @@
             .filter(name => !blockedFeats.includes(name.toLowerCase()))
             .join(", ") || "";
 
+          const languages = [];
+          // จัดการภาษาจากเผ่า (Race)
+          safeArray(c.modifiers?.race).forEach(mod => {
+            if (mod.type === "language" && mod.friendlySubtypeName) {
+              languages.push(`${mod.friendlySubtypeName}(R)`);
+            }
+          });
+          // จัดการภาษาจากพื้นหลัง (Background)
+          safeArray(c.modifiers?.background).forEach(mod => {
+            if (mod.type === "language" && mod.friendlySubtypeName) {
+              languages.push(`${mod.friendlySubtypeName}(B)`);
+            }
+          });
+          // จัดการภาษาจากพื้นหลัง (Class)
+          safeArray(c.modifiers?.class).forEach(mod => {
+            if (mod.type === "language" && mod.friendlySubtypeName) {
+              languages.push(`${mod.friendlySubtypeName}(C)`);
+            }
+          });
+
+          const skills = [];
+          const excludedItemsSkills = ["Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Hammer", "Mace", "Quarterstaff", "Sickle", "Spear", "Light Crossbow", "Dart", "Shortbow", "Sling", 
+          "Battleaxe", "Flail", "Glaive", "Greataxe", "Greatsword", "Halberd", "Lance", "Longsword", "Maul", "Morningstar", "Pike", "Rapier", "Scimitar", "Shortsword", "Trident", "War Pick", 
+          "Warhammer", "Whip", "Blowgun", "Hand Crossbow", "Heavy Crossbow", "Longbow", "Net", "Simple Weapons", "Crossbow, Hand", "Strength Saving Throws", "Dexterity Saving Throws", 
+          "Constitution Saving Throws", "Intelligence Saving Throws", "Wisdom Saving Throws", "Charisma Saving Throws", "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Martial Weapons", 
+          "Alchemist's Supplies", "Brewer's Supplies", "Calligrapher's Supplies", "Carpenter's Tools", "Cartographer's Tools", "Cobbler's Tools", "Cook's utensils", "Glassblower's Tools", 
+          "Jeweler's Tools", "Leatherworker's Tools", "Mason's Tools", "Painter's Supplies", "Potter's Tools", "Smith's Tools", "Tinker's Tools", "Weaver's Tools", "Woodcarver's Tools", "Dice set", 
+          "Dragonchess set", "Playing card set", "Three-Dragon Ante set", "Bagpipes", "Drum", "Dulcimer", "Flute", "Lute", "Lyre", "Horn", "Pan flute", "Shawm", "Viol", "Disguise kit", "Forgery kit", 
+          "Herbalism kit", "Navigator's Tools", "Poisoner's kit", "Thieves' Tools", "Firearms"];
+          // จัดการสกิลจากเผ่า (Race)
+          safeArray(c.modifiers?.race).forEach(mod => {
+            if (mod.type === "proficiency" && mod.friendlySubtypeName && !excludedItemsSkills.includes(mod.friendlySubtypeName)) {
+              skills.push(`${mod.friendlySubtypeName}(R)`);
+            }
+          });
+          // จัดการสกิลจากเผ่า (Background)
+          safeArray(c.modifiers?.background).forEach(mod => {
+            if (mod.type === "proficiency" && mod.friendlySubtypeName && !excludedItemsSkills.includes(mod.friendlySubtypeName)) {
+              skills.push(`${mod.friendlySubtypeName}(B)`);
+            }
+          });
+          // จัดการสกิลจากเผ่า (Class)
+          safeArray(c.modifiers?.class).forEach(mod => {
+            if (mod.type === "proficiency" && mod.friendlySubtypeName && !excludedItemsSkills.includes(mod.friendlySubtypeName)) {
+              skills.push(`${mod.friendlySubtypeName}(C)`);
+            }
+          });
+
+          const tools = [];
+          const excludedItemsTools = ["Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Hammer", "Mace", "Quarterstaff", "Sickle", "Spear", "Light Crossbow", "Dart", "Shortbow", "Sling", 
+          "Battleaxe", "Flail", "Glaive", "Greataxe", "Greatsword", "Halberd", "Lance", "Longsword", "Maul", "Morningstar", "Pike", "Rapier", "Scimitar", "Shortsword", "Trident", "War Pick", 
+          "Warhammer", "Whip", "Blowgun", "Hand Crossbow", "Heavy Crossbow", "Longbow", "Net", "Simple Weapons", "Crossbow, Hand", "Crossbow, Light", "Strength Saving Throws", "Dexterity Saving Throws", 
+          "Constitution Saving Throws", "Intelligence Saving Throws", "Wisdom Saving Throws", "Charisma Saving Throws", "Light Armor", "Medium Armor", "Heavy Armor", "Shields", "Martial Weapons",
+          "Athletics", "Acrobatics", "Sleight of Hand", "Stealth", "Arcana", "History", "Investigation", "Nature", "Religion", "Animal Handling", "Insight", "Medicine", "Perception", "Survival", 
+          "Deception", "Intimidation", "Performance", "Persuasion", "Firearms"];
+          // (Race)
+          safeArray(c.modifiers?.race).forEach(mod => {
+            if (mod.type === "proficiency" && mod.friendlySubtypeName && !excludedItemsTools.includes(mod.friendlySubtypeName)) {
+              tools.push(`${mod.friendlySubtypeName}(R)`);
+            }
+          });
+          // (Background)
+          safeArray(c.modifiers?.background).forEach(mod => {
+            if (mod.type === "proficiency" && mod.friendlySubtypeName && !excludedItemsTools.includes(mod.friendlySubtypeName)) {
+              tools.push(`${mod.friendlySubtypeName}(B)`);
+            }
+          });
+          // (Class)
+          safeArray(c.modifiers?.class).forEach(mod => {
+            if (mod.type === "proficiency" && mod.friendlySubtypeName && !excludedItemsTools.includes(mod.friendlySubtypeName)) {
+              tools.push(`${mod.friendlySubtypeName}(C)`);
+            }
+          });
+
+          const expertise = [];
+          // (Race)
+          safeArray(c.modifiers?.race).forEach(mod => {
+            if (mod.type === "expertise" && mod.friendlySubtypeName) {
+              expertise.push(`${mod.friendlySubtypeName}(R)`);
+            }
+          });
+          // (Background)
+          safeArray(c.modifiers?.background).forEach(mod => {
+            if (mod.type === "expertise" && mod.friendlySubtypeName) {
+              expertise.push(`${mod.friendlySubtypeName}(B)`);
+            }
+          });
+          // (Class)
+          safeArray(c.modifiers?.class).forEach(mod => {
+            if (mod.type === "expertise" && mod.friendlySubtypeName) {
+              expertise.push(`${mod.friendlySubtypeName}(C)`);
+            }
+          });
+
           // === Cantrips: ดึงเฉพาะ level: 0 จาก c.classSpells → definition → name ===
           const cantrips = [];
           safeArray(c.classSpells).forEach(cs => {
@@ -519,6 +613,12 @@
                 cantrips.push(spell.definition?.name || "N/A");
               }
             });
+          });
+
+          safeArray(c.spells?.race).forEach(s => {
+            if (s.definition?.level === 0 && s.definition?.name) {
+                cantrips.push(`${s.definition.name}(R)`);
+            }
           });
           
           // === Spells ระดับ 1 ===
@@ -551,6 +651,10 @@
           document.getElementById("cantrips").value = cantrips.join("\n");
           document.getElementById("spells1").value = spells1.join("\n");
           document.getElementById("spells2").value = spells2.join("\n");
+          document.getElementById("languages").value = languages.join(", ");
+          document.getElementById("skills").value = skills.join(", ");
+          document.getElementById("tools").value = tools.join(", ");
+          document.getElementById("expertise").value = expertise.join(", ");
 
           // === Stat ===
           Object.entries(statMap).forEach(([key, val]) => {
@@ -636,7 +740,6 @@
       });
 
       // Persist
-      // const persistIds = ["name", "primaryClass", "multiclass", "raceAsi", "customLineage", "background", "str", "dex", "con", "int", "wis", "cha", "languages", "skills", "tools", "expertise", "feat", "classOptions", "cantrips", "spells1", "spells2", "trackLink", "sheetLink"];
       const persistIds = ["name", "primaryClass", "multiclass", "raceAsi", "customLineage", "background", "languages", "skills", "tools", "expertise", "feat", "classOptions", "cantrips", "spells1", "spells2", "trackLink", "sheetLink"];
       window.addEventListener("DOMContentLoaded", () => {
         persistIds.forEach(id => {
