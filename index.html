@@ -497,9 +497,23 @@
             .filter(name => name !== "")
             .join(", ");
 
-          // === เผ่า + ASI ===
+          // === เผ่า ===
           let asiText = "";
           const raceName = safeValue(c.race?.fullName || c.race?.baseRaceName, "-");
+
+          // === customLineage ===
+          // (Race)
+          const customLineage = [];
+           safeArray(c.modifiers?.race).forEach(mod => {
+            if (mod.type === "size" && mod.friendlySubtypeName) {
+              customLineage.push(`Size ${mod.friendlySubtypeName}`);
+            }
+          });
+          safeArray(c.actions?.race).forEach(ac => {
+            if (ac.name) {
+              customLineage.push(`${ac.name}`);
+            }
+          });
 
           // === Background ===
           const background = safeValue(c.background?.definition?.name, "");
@@ -641,6 +655,7 @@
           document.getElementById("primaryClass").value = primaryClass;
           document.getElementById("multiclass").value = multiclass;
           document.getElementById("raceAsi").value = raceName;
+          document.getElementById("customLineage").value = customLineage.join("\n");
           document.getElementById("background").value = background;
           document.getElementById("feat").value = feats;
           document.getElementById("cantrips").value = cantrips.join("\n");
