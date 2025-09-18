@@ -504,9 +504,14 @@
           // === customLineage ===
           // (Race)
           const customLineage = [];
-           safeArray(c.modifiers?.race).forEach(mod => {
+          safeArray(c.modifiers?.race).forEach(mod => {
             if (mod.type === "size" && mod.friendlySubtypeName) {
               customLineage.push(`Size ${mod.friendlySubtypeName}`);
+            }
+          });
+          safeArray(c.modifiers?.race).forEach(mod => {
+            if (mod.type === "set-base" && mod.friendlySubtypeName && mod.value) {
+              customLineage.push(`${mod.friendlySubtypeName} ${mod.value} ft.`);
             }
           });
           safeArray(c.actions?.race).forEach(ac => {
