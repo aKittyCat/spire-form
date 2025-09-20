@@ -667,6 +667,16 @@
                 cantrips.push(`${s.definition.name}(R)`);
             }
           });
+          safeArray(c.spells?.class).forEach(s => {
+            if (s.definition?.level === 0 && s.definition?.name) {
+                cantrips.push(`${s.definition.name}(C)`);
+            }
+          });
+          safeArray(c.spells?.background).forEach(s => {
+            if (s.definition?.level === 0 && s.definition?.name) {
+                cantrips.push(`${s.definition.name}(B)`);
+            }
+          });
           
           // === Spells ระดับ 1 ===
           const spells1 = [];
