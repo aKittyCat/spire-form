@@ -656,6 +656,12 @@
             });
           });
 
+          safeArray(c.spells?.race).forEach(s => {
+            if (s.definition?.level === 1 && s.definition?.name) {
+                spells1.push(`${s.definition.name}(R)`);
+            }
+          });
+
           // === Spells ระดับ 2 ===
           const spells2 = [];
           safeArray(c.classSpells).forEach(cs => {
@@ -664,6 +670,12 @@
                 spells2.push(spell.definition?.name || "N/A");
               }
             });
+          });
+
+          safeArray(c.spells?.race).forEach(s => {
+            if (s.definition?.level === 2 && s.definition?.name) {
+                spells2.push(`${s.definition.name}(R)`);
+            }
           });
 
           // === อัปเดตฟอร์ม ===
