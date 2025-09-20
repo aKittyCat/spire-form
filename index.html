@@ -201,7 +201,7 @@
           <div class="grid md:grid-cols-2 gap-4 mt-4">
             <label class="block">
               <span class="text-sm text-gray-300">เผ่า & ASI Bonus จากเผ่า <span style="color: #cc10cc;">*ตัวอย่าง: Variant Human (STR +1, WIS +1)</span>
-              <textarea id="raceAsi" rows="3" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="ระบุเผ่าย่อย และถ้าเผ่ามีหลายเวอร์ชั่นให้บอกว่ามาจากเล่มไหน ตัวอย่าง: Variant Human (STR +1) (WIS +1)"></textarea>
+              <textarea id="raceAsi" rows="3" class="mt-1 w-full rounded-xl border border-fantasy-border bg-[#0f172a] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-fantasy-accent" placeholder="ระบุเผ่าย่อย และถ้าเผ่ามีหลายเวอร์ชั่นให้บอกว่ามาจากเล่มไหน ตัวอย่าง: Variant Human (STR +1, WIS +1)"></textarea>
             </label>
             <label class="block">
               <span class="text-sm text-gray-300">Custom Lineage Trait</span>
@@ -625,8 +625,9 @@
           const classOptions = [];
           // (Class)
           // Fighting Style
+          const validfComponentIds = [191, 262, 1610582];
           safeArray(c.options?.class).forEach(opt => {
-            if (opt.componentId === 191 && opt.definition?.name) {
+            if (validfComponentIds.includes(opt.componentId) && opt.definition?.name) {
               classOptions.push(`Fighting Style: ${opt.definition?.name}(C)`);
             }
           });
