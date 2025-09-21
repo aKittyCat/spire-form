@@ -507,6 +507,13 @@
           // === customLineage ===
           // (Race)
           const customLineage = [];
+          const excludedcustomLineage = ["Ability Score Increase", "Ability Score Increases", "Age", "Alignment", "Ancestral Legacy", "Feat", "Creature Type", 
+          "Darkvision", "Languages", "Size", "Skills", "Skill Versatility", "Speed", "Keen Senses"];
+          safeArray(c.race?.racialTraits).forEach(rr => {
+            if (rr.definition?.name && !excludedcustomLineage.includes(rr.definition?.name)) {
+              customLineage.push(`${rr.definition?.name}`);
+            }
+          });   
           safeArray(c.modifiers?.race).forEach(mod => {
             if (mod.type === "size" && mod.friendlySubtypeName) {
               customLineage.push(`Size ${mod.friendlySubtypeName}`);
@@ -515,11 +522,6 @@
           safeArray(c.modifiers?.race).forEach(mod => {
             if (mod.type === "set-base" && mod.friendlySubtypeName && mod.value) {
               customLineage.push(`${mod.friendlySubtypeName} ${mod.value} ft.`);
-            }
-          });
-          safeArray(c.actions?.race).forEach(ac => {
-            if (ac.name) {
-              customLineage.push(`${ac.name}`);
             }
           });
 
@@ -658,6 +660,11 @@
           safeArray(c.actions?.feat).forEach(ac => {
             if (ac.name) {
               classOptions.push(`${ac.name}(Feat)`);
+            }
+          });
+          safeArray(c.spells?.feat).forEach(sf => {
+            if (sf.definition?.name) {
+              classOptions.push(`${sf.definition?.name}(Feat)`);
             }
           });
           // Eldritch Invocations
