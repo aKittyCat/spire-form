@@ -524,7 +524,12 @@
           });
 
           // === Background ===
-          const background = safeValue(c.background?.definition?.name, "");
+          const background = safeValue(
+            c.background?.hasCustomBackground
+              ? `${c.background.customBackground?.name || ''} (Background Feature: ${c.background.customBackground?.featuresBackground?.featureName || ''} [${c.background.customBackground?.featuresBackground?.name || ''}])`
+              : c.background?.definition?.name,
+            ""
+          );
 
           // === Feats (ไม่รวม Hero's Journey Boon, Dark Bargain) ===
           const blockedFeats = ["hero's journey boon", "dark bargain"];
@@ -601,6 +606,12 @@
               tools.push(`${mod.friendlySubtypeName}(C)`);
             }
           });
+          // (Feat)
+          safeArray(c.modifiers?.feat).forEach(mod => {
+            if (mod.type === "proficiency" && mod.friendlySubtypeName && !excludedItemsTools.includes(mod.friendlySubtypeName)) {
+              tools.push(`${mod.friendlySubtypeName}(Feat)`);
+            }
+          });
 
           const expertise = [];
           // (Race)
@@ -653,7 +664,7 @@
               }
           });         
 
-          // === Cantrips: ดึงเฉพาะ level: 0 จาก c.classSpells → definition → name ===
+          // === Cantrips: ดึงเฉพาะ level: 0 จาก c.classSpells → spells → definition?.level → definition?.name ===
           const cantrips = [];
           safeArray(c.classSpells).forEach(cs => {
             safeArray(cs.spells).forEach(spell => {
