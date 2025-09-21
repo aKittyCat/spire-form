@@ -637,9 +637,21 @@
           // (Class)
           // Fighting Style
           const validfComponentIds = [191, 262, 1610582];
+          const validnComponentIds = [389];
           safeArray(c.options?.class).forEach(opt => {
             if (validfComponentIds.includes(opt.componentId) && opt.definition?.name) {
               classOptions.push(`Fighting Style: ${opt.definition?.name}(C)`);
+            }
+          });
+          // Name
+          safeArray(c.options?.class).forEach(opt => {
+            if (validnComponentIds.includes(opt.componentId) && opt.definition?.name) {
+              classOptions.push(`${opt.definition?.name}(C)`);
+            }
+          });
+          safeArray(c.actions?.class).forEach(ac => {
+            if (ac.name) {
+              classOptions.push(`${ac.name}(C)`);
             }
           });
           // Eldritch Invocations
@@ -662,7 +674,7 @@
                       classOptions.push(result);
                   }
               }
-          });         
+          });        
 
           // === Cantrips: ดึงเฉพาะ level: 0 จาก c.classSpells → spells → definition?.level → definition?.name ===
           const cantrips = [];
