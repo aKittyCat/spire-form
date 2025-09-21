@@ -633,8 +633,8 @@
             }
           });
 
+          // classOptions
           const classOptions = [];
-          // (Class)
           // Fighting Style
           const validfComponentIds = [191, 262, 1610582];
           const validnComponentIds = [389];
@@ -649,9 +649,15 @@
               classOptions.push(`${opt.definition?.name}(C)`);
             }
           });
+          // Actions
           safeArray(c.actions?.class).forEach(ac => {
             if (ac.name) {
               classOptions.push(`${ac.name}(C)`);
+            }
+          });
+          safeArray(c.actions?.feat).forEach(ac => {
+            if (ac.name) {
+              classOptions.push(`${ac.name}(Feat)`);
             }
           });
           // Eldritch Invocations
