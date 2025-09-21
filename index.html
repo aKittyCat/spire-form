@@ -662,11 +662,6 @@
               classOptions.push(`${ac.name}(Feat)`);
             }
           });
-          safeArray(c.spells?.feat).forEach(sf => {
-            if (sf.definition?.name) {
-              classOptions.push(`${sf.definition?.name}(Feat)`);
-            }
-          });
           // Eldritch Invocations
           safeArray(c.options?.class).forEach(opt => {
               if (opt.componentId === 388 && opt.definition) {
@@ -714,6 +709,11 @@
                 cantrips.push(`${s.definition.name}(B)`);
             }
           });
+          safeArray(c.spells?.feat).forEach(s => {
+            if (s.definition?.level === 0 && s.definition?.name) {
+                cantrips.push(`${s.definition.name}(Feat)`);
+            }
+          });
           
           // === Spells ระดับ 1 ===
           const spells1 = [];
@@ -740,6 +740,11 @@
                 spells1.push(`${s.definition.name}(B)`);
             }
           });
+          safeArray(c.spells?.feat).forEach(s => {
+            if (s.definition?.level === 1 && s.definition?.name) {
+                cantrips.push(`${s.definition.name}(Feat)`);
+            }
+          });
 
           // === Spells ระดับ 2 ===
           const spells2 = [];
@@ -764,6 +769,11 @@
           safeArray(c.spells?.background).forEach(s => {
             if (s.definition?.level === 2 && s.definition?.name) {
                 spells2.push(`${s.definition.name}(B)`);
+            }
+          });
+          safeArray(c.spells?.feat).forEach(s => {
+            if (s.definition?.level === 2 && s.definition?.name) {
+                cantrips.push(`${s.definition.name}(Feat)`);
             }
           });
 
