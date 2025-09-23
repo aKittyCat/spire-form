@@ -142,6 +142,8 @@ async function fetchCharacter() {
       "Skill Versatility",
       "Speed",
       "Keen Senses",
+      "Versatile",
+      "Skillful",
     ];
     safeArray(c.race?.racialTraits).forEach((rr) => {
       if (
