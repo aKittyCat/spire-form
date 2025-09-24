@@ -397,7 +397,7 @@ async function fetchCharacter() {
     });
 
     // classOptions
-    const classOptions = [];
+    const classOptions = new Set();
     // Fighting Style
     const validfComponentIds = [191, 262, 1610582];
     const validnComponentIds = [389];
@@ -406,7 +406,7 @@ async function fetchCharacter() {
         validfComponentIds.includes(opt.componentId) &&
         opt.definition?.name
       ) {
-        classOptions.push(`Fighting Style: ${opt.definition?.name}(C)`);
+        classOptions.add(`Fighting Style: ${opt.definition?.name}(C)`);
       }
     });
     // Name
@@ -415,18 +415,18 @@ async function fetchCharacter() {
         validnComponentIds.includes(opt.componentId) &&
         opt.definition?.name
       ) {
-        classOptions.push(`${opt.definition?.name}(C)`);
+        classOptions.add(`${opt.definition?.name}(C)`);
       }
     });
     // Actions
     safeArray(c.actions?.class).forEach((ac) => {
       if (ac.name) {
-        classOptions.push(`${ac.name}(C)`);
+        classOptions.add(`${ac.name}(C)`);
       }
     });
     safeArray(c.actions?.feat).forEach((ac) => {
       if (ac.name) {
-        classOptions.push(`${ac.name}(Feat)`);
+        classOptions.add(`${ac.name}(Feat)`);
       }
     });
     // Eldritch Invocations
@@ -434,24 +434,20 @@ async function fetchCharacter() {
       if (opt.componentId === 388 && opt.definition) {
         const invocationName = opt.definition.name;
         const description = opt.definition.description;
-
-        // ใช้ Regex เพื่อดึงคำที่อยู่ในแท็ก <span>
         const match = description?.match(
           /<span class="Serif-Character-Style_Italic-Serif">([^<]+)<\/span>/i
         );
-
         if (match && match[1]) {
-          // ถ้าเจอ spellName ให้แสดงผลแบบเต็ม
           const spellName = toTitleCase(match[1]);
           const result = `Eldritch Invocations: ${invocationName}/${spellName}(C)`;
-          classOptions.push(result);
+          classOptions.add(result);
         } else {
-          // ถ้าไม่เจอ spellName ให้แสดงผลแบบชื่อปกติ
           const result = `Eldritch Invocations: ${invocationName}(C)`;
-          classOptions.push(result);
+          classOptions.add(result);
         }
       }
     });
+    const finalClassOptions = Array.from(classOptions);
 
     // === Cantrips: ดึงเฉพาะ level: 0 จาก c.classSpells → spells → definition?.level → definition?.name ===
     const cantrips = [];
@@ -554,7 +550,7 @@ async function fetchCharacter() {
     document.getElementById("customLineage").value = customLineage.join("\n");
     document.getElementById("background").value = background;
     document.getElementById("feat").value = feats;
-    document.getElementById("classOptions").value = classOptions.join("\n");
+    document.getElementById("classOptions").value = finalClassOptions.join("\n");
     document.getElementById("cantrips").value = cantrips.join("\n");
     document.getElementById("spells1").value = spells1.join("\n");
     document.getElementById("spells2").value = spells2.join("\n");
