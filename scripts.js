@@ -508,7 +508,7 @@ async function fetchCharacter() {
     });
     safeArray(c.spells?.feat).forEach((s) => {
       if (s.definition?.level === 1 && s.definition?.name) {
-        cantrips.push(`${s.definition.name}(Feat)`);
+        spells1.push(`${s.definition.name}(Feat)`);
       }
     });
 
@@ -539,7 +539,7 @@ async function fetchCharacter() {
     });
     safeArray(c.spells?.feat).forEach((s) => {
       if (s.definition?.level === 2 && s.definition?.name) {
-        cantrips.push(`${s.definition.name}(Feat)`);
+        spells2.push(`${s.definition.name}(Feat)`);
       }
     });
 
