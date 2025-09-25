@@ -142,6 +142,7 @@ async function fetchCharacter() {
       "Skill Versatility",
       "Speed",
       "Keen Senses",
+      "Variable Trait"
       "Versatile",
       "Skillful",
     ];
