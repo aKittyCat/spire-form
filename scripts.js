@@ -571,6 +571,8 @@ async function fetchCharacter() {
 
     // อัปเดต Total Points หลังดึงข้อมูล
     updateTotalPoints();
+    document.getElementById("successModal").classList.remove("hidden");
+    document.getElementById("successModalOverlay").classList.remove("hidden");
   } catch (err) {
     console.error("Fetch Error:", err);
     alert("ดึงข้อมูลไม่สำเร็จ: " + (err.message || "เกิดข้อผิดพลาด"));
