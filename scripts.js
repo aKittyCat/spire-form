@@ -145,6 +145,7 @@ async function fetchCharacter() {
       "Variable Trait",
       "Versatile",
       "Skillful",
+      "Increase two scores (+2 / +1)",
     ];
     safeArray(c.race?.racialTraits).forEach((rr) => {
       if (
