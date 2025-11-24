@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>D&D Character – Discord Form</title>
+    <title>The Spire Discord Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="color-scheme" content="dark" />
     <script>
@@ -85,7 +85,6 @@
           left: 0;
           width: 100%;
           height: 100%;
-          /* ใช้น้ำหนักเบาลงของสีดำเพื่อให้พื้นหลังดูมืดลง */
           background-color: rgba(0, 0, 0, 0.75); 
           z-index: 1000; 
           display: flex;
@@ -102,17 +101,14 @@
           z-index: 1001; 
           width: 90%; 
           max-width: 450px; 
-          /* ใช้สี border เป็นเงาที่ดูมีมิติ */
           box-shadow: 0 0 20px 5px rgba(40, 52, 71, 0.5); 
-          /* เพิ่ม border เพื่อความคมชัด */
           border: 1px solid #283447; 
           border-radius: 8px;
       }
 
       .modal-content {
-          /* ใช้สี panel เป็นพื้นหลังหลัก */
           background-color: #111827;
-          color: #fefefe; /* เปลี่ยนสีข้อความเป็นสีขาวหรือสีสว่าง */
+          color: #fefefe;
           padding: 30px 20px;
           border-radius: 8px;
           text-align: center;
@@ -122,7 +118,7 @@
 
       /* Close Button */
       .close-button {
-          color: #D4AF37; /* ใช้สี gold */
+          color: #D4AF37;
           float: right;
           font-size: 28px;
           font-weight: bold;
@@ -135,13 +131,13 @@
 
       .close-button:hover,
       .close-button:focus {
-          color: #fefefe; /* สว่างขึ้นเมื่อ hover */
+          color: #fefefe;
           text-decoration: none;
       }
 
       /* Header and Text */
       .modal-content h2 {
-          color: #D4AF37; /* ใช้สี gold สำหรับหัวข้อหลัก */
+          color: #D4AF37;
           margin-top: 0;
           margin-bottom: 10px;
       }
@@ -152,17 +148,15 @@
       }
 
       .modal-content strong {
-          /* เน้นข้อความเตือนให้ชัดเจน */
           color: #FFC107; 
           font-size: 1.1em;
       }
 
       .modal-tip {
           font-size: 0.85em;
-          color: #ddd; /* สีข้อความสว่าง */
+          color: #ddd;
           margin-top: 15px;
           padding: 10px;
-          /* ใช้สี border เป็นพื้นหลังส่วนเน้น */
           background-color: #283447; 
           border-radius: 4px;
           border-left: 3px solid #D4AF37;
@@ -170,7 +164,6 @@
 
       /* Button */
       .modal-button {
-          /* ใช้สี accent สำหรับปุ่ม */
           background-color: #8B5CF6; 
           color: white;
           padding: 10px 20px;
@@ -183,7 +176,6 @@
       }
 
       .modal-button:hover {
-          /* สีเข้มขึ้นเล็กน้อยเมื่อ hover */
           background-color: #7C3AED; 
       }
 
@@ -197,6 +189,88 @@
           .modal-content {
               padding: 20px 15px;
           }
+      }
+
+      /* ---------------- NEW RULE MODAL STYLES ---------------- */
+      /* New Rule Button Style (using theme colors) */
+      .btn-rule-modal {
+          /* Tailwind equivalent: bg-fantasy-accent hover:bg-violet-700 text-white */
+          background-color: #8B5CF6; 
+          color: white;
+          padding: 8px 16px;
+          font-size: 14px; 
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          font-weight: 500;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+      }
+
+      .btn-rule-modal:hover {
+          background-color: #7C3AED; /* Darker accent */
+      }
+
+      /* Rule Modal Content Specific Styling (for readability of long list) */
+      .rule-modal-content h2 { 
+          color: #D4AF37; /* fantasy-gold */
+          margin-top: 0; 
+          margin-bottom: 10px; 
+          padding-bottom: 5px;
+          border-bottom: 1px solid #283447; /* fantasy-border */
+          text-align: left;
+          font-size: 1.5rem;
+      }
+
+      .rule-modal-content h3 { 
+          color: #8B5CF6; /* fantasy-accent */
+          margin-top: 20px; 
+          margin-bottom: 8px; 
+          font-size: 1.1em; 
+          font-weight: 600;
+      }
+
+      .rule-modal-content h3.banned { 
+          color: #F87171; /* A light red for the dark theme */
+      } 
+
+      .rule-modal-content ul { 
+          padding-left: 20px; 
+          list-style-type: disc;
+          margin: 5px 0; 
+          text-align: left;
+      }
+
+      .rule-modal-content li { 
+          margin-bottom: 6px; 
+          line-height: 1.5; 
+          font-size: 0.9em; 
+          color: #ccc; /* Lighter gray */
+      }
+
+      .rule-note {
+          font-size: 0.8em;
+          color: #fff;
+          font-style: italic;
+          background: #283447; /* fantasy-border as background */
+          padding: 2px 6px;
+          border-radius: 4px;
+          display: inline-block;
+          margin-top: 2px;
+          border-left: 3px solid #D4AF37; /* fantasy-gold line */
+      }
+
+      .rule-sub-note {
+          display: block;
+          margin-top: 4px;
+          padding: 5px 10px;
+          border-left: 3px solid #8B5CF6; /* fantasy-accent line */
+          font-size: 0.85em;
+          background-color: #1a2434;
+          border-radius: 4px;
       }
     </style>
   </head>
@@ -213,7 +287,6 @@
         </p>
       </header>
 
-      <!-- Input URL -->
       <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg mb-6">
         <div class="flex flex-col gap-3">
           <label class="block">
@@ -241,7 +314,6 @@
           หมายเหตุ: อยู่ระหว่างการทดสอบ เมื่อดึงข้อมูลมาแล้วโปรดตรวจสอบด้วยตนเองอีกครั้งด้วย
         </p>
       </section>
-      <!-- Modal -->
       <div id="successModalOverlay" class="modal-overlay hidden"></div>
       <div id="successModal" class="modal hidden">
           <div class="modal-content">
@@ -253,12 +325,10 @@
           </div>
       </div>
 
-      <!-- Info Card -->
       <section
         class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg mb-6"
       >
         <div class="flex items-center gap-2 mb-3">
-          <div class="h-2 w-2 rounded-full bg-fantasy-gold"></div>
           <h2 class="text-lg font-semibold">
             📌 ข้อมูล / วิธีสร้างตัวละคร
           </h2>
@@ -270,7 +340,12 @@
               href="https://docs.google.com/spreadsheets/d/1dvQ9WB0muYBLnrZqVhT9YRBcgpCXGQlBwR1rMwuqg6s/"
               target="_blank"
               class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              ><b>Character Tracking Sheet</b></a>
+              ><b>Character Tracking Sheet</b></a>หรือ
+            <a
+              href="https://spiretk.web.app/"
+              target="_blank"
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              ><b>The Spire Tracking</b></a>
             ไว้บันทึก session/เลเวล
           </li>
           <li>
@@ -308,10 +383,17 @@
             >
           </li>
         </ol>
+        <div class="mt-4">
+          <button id="openRuleModal" onclick="openRuleModal()" class="btn-rule-modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+              <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-.957.066-1.97.2-2.814.568A1.5 1.5 0 0 0 0 2.825v11.97c0 .265.176.425.29.569a.952.952 0 0 0 .7.255c.836-.08.975-.285 1.58-.453 1.883-.553 3.18-.738 5.42-.581 2.37.159 4.01.442 5.76.924a2.7 2.7 0 0 0 2.457-1.144c.15-.22.257-.454.257-.665V2.825c0-.62-.51-1.155-1.125-1.196-.94-.064-1.897.04-2.802.46-.943.434-2.02.73-3.084.73s-2.141-.296-3.084-.73h-.002z"/>
+            </svg>
+            รายชื่อหนังสือที่อนุญาต
+          </button>
+        </div>
       </section>
 
       <form id="charForm" class="space-y-6">
-        <!-- Basics -->
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
           <h3 class="text-lg font-semibold mb-4">🧾 ข้อมูลตัวละคร</h3>
           <div class="grid md:grid-cols-2 gap-4">
@@ -348,7 +430,6 @@
           </div>
         </section>
 
-        <!-- Stats -->
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
           <div class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-4">
             <h3 class="text-lg font-semibold">📊 ค่าสถานะ (ไม่รวม Bonus) — 35 Point Buy, Fixed HP</h3>
@@ -419,7 +500,6 @@
           </div>
         </section>
 
-        <!-- Proficiencies -->
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
           <div class="flex items-center justify-between">
             <h3 class="text-lg font-semibold mb-4">🎒 ความถนัด & ตัวเลือกอื่นๆ</h3>
@@ -458,7 +538,6 @@
           </p>
         </section>
 
-        <!-- Cantrips & Spells -->
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
           <h3 class="text-lg font-semibold mb-4">🪄 Cantrips & Spells (ถ้ามี)</h3>
           <div class="grid md:grid-cols-3 gap-4">
@@ -477,7 +556,6 @@
           </div>
         </section>
 
-        <!-- Platforms & Links -->
         <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg">
           <h3 class="text-lg font-semibold mb-4">🌐 แพลตฟอร์ม & ลิงก์</h3>
           <div class="grid md:grid-cols-2 gap-4">
@@ -502,7 +580,6 @@
           </div>
         </section>
 
-        <!-- Actions -->
         <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
           <button type="button" id="btnGenerate" class="inline-flex items-center justify-center rounded-xl bg-fantasy-accent px-4 py-2 font-semibold hover:opacity-90 active:scale-[.99] transition">Generate ข้อความสำหรับ Discord</button>
           <button type="button" id="btnCopy" class="inline-flex items-center justify-center rounded-xl border border-fantasy-border px-4 py-2 font-medium hover:bg-white/5 transition">คัดลอกข้อความ</button>
@@ -511,7 +588,6 @@
         </div>
       </form>
 
-      <!-- Output -->
       <section class="rounded-2xl border border-fantasy-border bg-fantasy-panel p-5 md:p-6 shadow-lg mt-6">
         <h3 class="text-lg font-semibold mb-3">🧾 ข้อความตัวอย่างสำหรับ Discord</h3>
         <span class="text-xs text-green-400">*สามารถแก้ไขในช่องนี้ได้</span>
@@ -525,13 +601,85 @@
       </footer>
     </div>
 
-    <!-- Script -->
+    <div id="ruleModalOverlay" class="modal-overlay hidden"></div>
+    <div id="ruleModal" class="modal hidden">
+        <div class="modal-content rule-modal-content" style="max-width: 800px; text-align: left; max-height: 90vh; overflow-y: auto;">
+            <span class="close-button" onclick="closeRuleModal()">&times;</span>
+            
+            <h2>📖 รายชื่อหนังสือที่อนุญาต</h2>
+
+            <h3>📚 หนังสือจากออฟฟิเชี่ยล (2014)</h3>
+            <ul>
+                <li><strong>Wizards of the Coast (2014):</strong> คลาสหลัก คลาสรอง เผ่าหลัก เผ่าย่อย background feats และเวทย์มนต์จากหนังสือ Wizards of the Coast for Dungeons and Dragons 5th Edition (2014)</li>
+            </ul>
+
+            <h3>🤝 Partnered Content</h3>
+            <ul>
+                <li><strong>Grim Hollow: Lairs of Etharis:</strong> <span class="rule-note">ยกเว้น feats</span></li>
+                <li><strong>Grim Hollow: Player Pack:</strong> <span class="rule-note">ยกเว้นคลาส Blade Breaker</span></li>
+                <li><strong>Critical Role: Explorer's Guide to Wildemount:</strong> <span class="rule-note">ยกเว้น Gunslinger subclass</span></li>
+                <li><strong>Critical Role: Call of the Netherdeep</strong></li>
+                <li><strong>Tal’Dorei Campaign Setting Reborn:</strong> 
+                    <span class="rule-note">Mystic Conflux สามารถเลือกได้เมื่อตัวละครถึง Tier 4 และมีเลเวลตั้งแต่ 17 ขึ้นไป</span>
+                </li>
+                <li><strong>Humblewood Campaign Setting</strong></li>
+                <li><strong>Humblewood Tales</strong></li>
+                <li><strong>Dungeons of Drakkenheim In Search of the Smuggler's Secrets</strong></li>
+                <li><strong>MCDM: Flee, Mortals!, Where Evil Lives</strong> </li>
+                <li><strong>Frozen Sick</strong>, <strong>Lightning Keep</strong>, <strong>Tome of Beasts 1</strong></li>
+                <li><strong>The Griffon’s Saddlebag: Book Two:</strong> <span class="rule-note">ยกเว้น Warlock: The Many</span></li>
+                <li><strong>Obojima: Tales from the Tall Grass:</strong> 
+                    <span class="rule-note">ยกเว้น Hero's Journey Boon, Feat สำหรับแคมเปญและไอเทมประเภท Ingredient</span>
+                </li>
+                <li><strong>Steinhardt's Guide to The Eldritch Hunt:</strong>
+                    <span class="rule-note">ยกเว้น: คลาสรอง Blade of Radiance และ Living Nightmare, Backgrounds, ไอเทม, cannoneer และ optional replacement feats</span>
+                    <div class="rule-sub-note">
+                        <strong>*สำหรับ Jaeger:</strong> ข้อจำกัดสำหรับมัลติคลาส: Ability Score ขั้นต่ำ Strength 13 หรือ Dexterity 13, Multiclassing Proficiencies: Light armor, medium armor, simple weapons, martial weapons, firearm
+                    </div>
+                </li>
+            </ul>
+
+            <h3 class="banned">🚫 Banned list: (ไม่อนุญาต)</h3>
+            <ul>
+                <li><strong>Kobold Press:</strong> Book of Ebon Tides, Tales from the Shadows</li>
+                <li>The Illrigger Revised</li>
+                <li>The Lord of the Rings Roleplaying</li>
+                <li>Grim Hollow: Player Guide</li>
+            </ul>
+
+            <button onclick="closeRuleModal()" class="modal-button mt-4 w-full">ปิด</button>
+        </div>
+    </div>
+
     <script src="./scripts.js"></script>
     <script>
       function closeSuccessModal() {
           document.getElementById("successModal").classList.add("hidden");
           document.getElementById("successModalOverlay").classList.add("hidden");
       }
+      
+      // New functions for the Rule Modal
+      function openRuleModal() {
+          document.getElementById("ruleModal").classList.remove("hidden");
+          document.getElementById("ruleModalOverlay").classList.remove("hidden");
+      }
+
+      function closeRuleModal() {
+          document.getElementById("ruleModal").classList.add("hidden");
+          document.getElementById("ruleModalOverlay").classList.add("hidden");
+      }
+      
+      // Optional: Add event listener for clicking outside the modal
+      document.addEventListener('DOMContentLoaded', (event) => {
+          const ruleModalOverlay = document.getElementById('ruleModalOverlay');
+          if (ruleModalOverlay) {
+              ruleModalOverlay.addEventListener('click', (e) => {
+                if(e.target === ruleModalOverlay) {
+                  closeRuleModal();
+                }
+              });
+          }
+      });
     </script>
   </body>
 </html>
